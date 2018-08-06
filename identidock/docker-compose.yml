@@ -1,0 +1,29 @@
+version: '2'
+
+services:
+    identidock:
+             build: .
+             ports:
+               - "5000:5000"
+             environment:
+               ENV: DEV
+             volumes:
+               - ./app:/app
+             networks:
+               - python-test
+
+    dnmonster:
+             image: amouat/dnmonster:1.0
+             networks:
+               - python-test
+
+    redis:
+             image: redis:3.0
+             networks:
+               - python-test
+
+
+networks:
+ python-test:
+  external:
+    name: python-test
